@@ -53,9 +53,9 @@ const Navbar = () => {
         >
           <p>Contact</p>
         </NavLink>
-        <button className="cta">
+        <Link to={`${import.meta.env.VITE_ADMIN_URI}`} className="cta">
           <span className="hover-underline-animation">Admin Panel</span>
-        </button>
+        </Link>
       </ul>
 
       <div className="flex items-center gap-6">
