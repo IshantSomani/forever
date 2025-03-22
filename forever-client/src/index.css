@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap');
+@import "tailwindcss";
+
+@layer components {
+    .nav-flex-mobile {
+        @apply py-2 pl-6 border border-gray-200;
+    }
+
+    .nav-flex-web {
+        @apply flex flex-col items-center gap-1 uppercase;
+    }
+
+    .active-b-bar {
+        @apply border-b-2 font-bold border-neutral-950;
+    }
+
+    .border-t-gray {
+        @apply border-t border-gray-300;
+    }
+
+    .border-t-b {
+        @apply border-t border-b border-t-gray-300 border-b-gray-300;
+    }
+
+}
+
+@layer base {
+    button {
+        cursor: pointer;
+        @apply transition-colors duration-500 ease-in-out;
+    }
+
+    img {
+        @apply select-none;
+    }
+}
+
+* {
+    font-family: Outfit;
+}
+
+.prata-regular {
+    font-family: "Prata", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Custom responsive toast styles */
+.Toastify__toast-container {
+    width: 320px;
+    font-size: 16px;
+}
+
+.Toastify__toast {
+    min-height: 60px;
+    margin: 0 0 1rem;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .Toastify__toast-container {
+        width: 90vw;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 1rem;
+    }
+
+    .Toastify__toast {
+        font-size: 14px;
+        min-height: 50px;
+        margin-bottom: 0.5rem;
+    }
+
+    .Toastify__close-button {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .Toastify__toast-container {
+        width: 95vw;
+        padding: 0 5px;
+    }
+
+    .Toastify__toast {
+        padding: 12px;
+    }
+}
+
+
+/* Amimation  */
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+.animate-bounce {
+    animation: bounce 1s infinite;
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(-25%);
+    }
+
+    50% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Button  */
+.cta {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.cta span {
+    padding-bottom: 4px;
+    letter-spacing: 2px;
+    font-size: 14px;
+    padding-right: 15px;
+    text-transform: uppercase;
+}
+
+.hover-underline-animation {
+    position: relative;
+    /* color: black; */
+    padding-bottom: 20px;
+}
+
+.hover-underline-animation:after {
+    content: "";
+    position: absolute;
+    width: 88%;
+    transform: scaleX(0);
+    height: 1.5px;
+    bottom: 0;
+    left: 0;
+    background-color: #0a0a0a;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.cta:hover .hover-underline-animation:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
