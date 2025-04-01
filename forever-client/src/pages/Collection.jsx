@@ -4,6 +4,8 @@ import { assets } from '../assets/assets';
 import Title from '../components/Title';
 import ProductItem from '../components/ProductItem';
 import LoadingSpinner from '../components/LoadingSpinner';
+import Pagination from '../components/Pagination';
+import { usePagination } from '../hooks/usePagination';
 
 const Collection = () => {
   const { products, search, showSearch } = useContext(ShopContext);
@@ -12,6 +14,9 @@ const Collection = () => {
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
   const [sortType, setSortType] = useState('relavent');
+
+  // Pagination Custom Hook 
+  const { currentPage, setCurrentPage, currentProducts, totalPages } = usePagination({ FilterProducts })
 
   const toggleCategory = (e) => {
     if (category.includes(e.target.value)) {
@@ -44,31 +49,26 @@ const Collection = () => {
       tempProducts = tempProducts.filter(item => subCategory.includes(item.subCategory))
     }
 
+    switch (sortType) {
+      case 'low-high':
+        tempProducts.sort((a, b) => a.price - b.price);
+        break;
+      case 'high-low':
+        tempProducts.sort((a, b) => b.price - a.price);
+        break;
+      default:
+        break;
+    }
+
     setFilterProducts(tempProducts)
-  }, [products, category, subCategory, search, showSearch])
+    // Reset to first page when filters change
+    setCurrentPage(1);
+  }, [products, category, subCategory, search, showSearch, sortType, setCurrentPage]);
 
   useEffect(() => {
     appliyFilter()
   }, [appliyFilter, category, subCategory, search, showSearch, products])
 
-  const sortProduct = useCallback(() => {
-    let fpCopy = [...FilterProducts];
-    switch (sortType) {
-      case 'low-high':
-        fpCopy.sort((a, b) => a.price - b.price);
-        break;
-      case 'high-low':
-        fpCopy.sort((a, b) => b.price - a.price);
-        break;
-      default:
-        return;
-    }
-    setFilterProducts(fpCopy);
-  }, [FilterProducts, sortType]);
-
-  useEffect(() => {
-    sortProduct()
-  }, [sortProduct])
 
   if (!products.length) {
     return (
@@ -137,7 +137,7 @@ const Collection = () => {
 
           <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 gap-y-6'>
             {
-              FilterProducts.map((item) => (
+              currentProducts.map((item) => (
                 <ProductItem
                   key={item._id}
                   id={item._id}
@@ -148,6 +148,12 @@ const Collection = () => {
               ))
             }
           </div>
+
+          <Pagination
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
         </div>
       </div></>
   )

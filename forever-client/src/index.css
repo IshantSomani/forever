@@ -1,176 +1,211 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Prata&display=swap");
 @import "tailwindcss";
 
+@theme {
+  /* light theme */
+  --color-surface: var(--color-white);
+  --color-surface-alt: var(--color-neutral-50);
+  --color-on-surface: var(--color-neutral-600);
+  --color-on-surface-strong: var(--color-neutral-900);
+  --color-primary: var(--color-black);
+  --color-on-primary: var(--color-neutral-100);
+  --color-secondary: var(--color-neutral-800);
+  --color-on-secondary: var(--color-white);
+  --color-outline: var(--color-neutral-300);
+  --color-outline-strong: var(--color-neutral-800);
+
+  /* dark theme */
+  --color-surface-dark: var(--color-neutral-950);
+  --color-surface-dark-alt: var(--color-neutral-900);
+  --color-on-surface-dark: var(--color-neutral-300);
+  --color-on-surface-dark-strong: var(--color-white);
+  --color-primary-dark: var(--color-white);
+  --color-on-primary-dark: var(--color-black);
+  --color-secondary-dark: var(--color-neutral-300);
+  --color-on-secondary-dark: var(--color-black);
+  --color-outline-dark: var(--color-neutral-700);
+  --color-outline-dark-strong: var(--color-neutral-300);
+
+  /* shared colors */
+  --color-info: var(--color-sky-500);
+  --color-on-info: var(--color-white);
+  --color-success: var(--color-green-500);
+  --color-on-success: var(--color-white);
+  --color-warning: var(--color-amber-500);
+  --color-on-warning: var(--color-white);
+  --color-danger: var(--color-red-500);
+  --color-on-danger: var(--color-white);
+
+  /* border radius */
+  --radius-radius: var(--radius-sm);
+}
+
 @layer components {
-    .nav-flex-mobile {
-        @apply py-2 pl-6 border border-gray-200;
-    }
+  .nav-flex-mobile {
+    @apply py-2 pl-6 border border-gray-200;
+  }
 
-    .nav-flex-web {
-        @apply flex flex-col items-center gap-1 uppercase;
-    }
+  .nav-flex-web {
+    @apply flex flex-col items-center gap-1 uppercase;
+  }
 
-    .active-b-bar {
-        @apply border-b-2 font-bold border-neutral-950;
-    }
+  .active-b-bar {
+    @apply border-b-2 font-bold border-neutral-950;
+  }
 
-    .border-t-gray {
-        @apply border-t border-gray-300;
-    }
+  .border-t-gray {
+    @apply border-t border-gray-300;
+  }
 
-    .border-t-b {
-        @apply border-t border-b border-t-gray-300 border-b-gray-300;
-    }
-
+  .border-t-b {
+    @apply border-t border-b border-t-gray-300 border-b-gray-300;
+  }
 }
 
 @layer base {
-    button {
-        cursor: pointer;
-        @apply transition-colors duration-500 ease-in-out;
-    }
+  button {
+    cursor: pointer;
+    @apply transition-colors duration-500 ease-in-out;
+  }
 
-    img {
-        @apply select-none;
-    }
+  img {
+    @apply select-none;
+  }
 }
 
 * {
-    font-family: Outfit;
+  font-family: Outfit;
 }
 
 .prata-regular {
-    font-family: "Prata", serif;
-    font-weight: 400;
-    font-style: normal;
+  font-family: "Prata", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 ::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 /* Custom responsive toast styles */
 .Toastify__toast-container {
-    width: 320px;
-    font-size: 16px;
+  width: 320px;
+  font-size: 16px;
 }
 
 .Toastify__toast {
-    min-height: 60px;
-    margin: 0 0 1rem;
-    border-radius: 8px;
+  min-height: 60px;
+  margin: 0 0 1rem;
+  border-radius: 8px;
 }
 
 @media (max-width: 768px) {
-    .Toastify__toast-container {
-        width: 90vw;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 1rem;
-    }
+  .Toastify__toast-container {
+    width: 90vw;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 1rem;
+  }
 
-    .Toastify__toast {
-        font-size: 14px;
-        min-height: 50px;
-        margin-bottom: 0.5rem;
-    }
+  .Toastify__toast {
+    font-size: 14px;
+    min-height: 50px;
+    margin-bottom: 0.5rem;
+  }
 
-    .Toastify__close-button {
-        width: 20px;
-        height: 20px;
-    }
+  .Toastify__close-button {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 @media (max-width: 480px) {
-    .Toastify__toast-container {
-        width: 95vw;
-        padding: 0 5px;
-    }
+  .Toastify__toast-container {
+    width: 95vw;
+    padding: 0 5px;
+  }
 
-    .Toastify__toast {
-        padding: 12px;
-    }
+  .Toastify__toast {
+    padding: 12px;
+  }
 }
-
 
 /* Amimation  */
 .animate-spin {
-    animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
 }
 
 .animate-bounce {
-    animation: bounce 1s infinite;
+  animation: bounce 1s infinite;
 }
 
 .animate-pulse {
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(-25%);
+  }
 
-    0%,
-    100% {
-        transform: translateY(-25%);
-    }
-
-    50% {
-        transform: translateY(0);
-    }
+  50% {
+    transform: translateY(0);
+  }
 }
 
 @keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
 
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.5;
-    }
+  50% {
+    opacity: 0.5;
+  }
 }
 
 /* Button  */
 .cta {
-    border: none;
-    background: none;
-    cursor: pointer;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
 .cta span {
-    padding-bottom: 4px;
-    letter-spacing: 2px;
-    font-size: 14px;
-    padding-right: 15px;
-    text-transform: uppercase;
+  padding-bottom: 4px;
+  letter-spacing: 2px;
+  font-size: 14px;
+  padding-right: 15px;
+  text-transform: uppercase;
 }
 
 .hover-underline-animation {
-    position: relative;
-    /* color: black; */
-    padding-bottom: 20px;
+  position: relative;
+  /* color: black; */
+  padding-bottom: 20px;
 }
 
 .hover-underline-animation:after {
-    content: "";
-    position: absolute;
-    width: 88%;
-    transform: scaleX(0);
-    height: 1.5px;
-    bottom: 0;
-    left: 0;
-    background-color: #0a0a0a;
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
+  content: "";
+  position: absolute;
+  width: 88%;
+  transform: scaleX(0);
+  height: 1.5px;
+  bottom: 0;
+  left: 0;
+  background-color: #0a0a0a;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
 }
 
 .cta:hover .hover-underline-animation:after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
