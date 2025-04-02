@@ -20,7 +20,6 @@ const BestSeller = () => {
             <div className="flex items-center justify-center p-4">
                 <div className="p-8 max-w-md w-full">
                     <LoadingSpinner
-                        title="Loading..."
                         message="We're fetching the most popular products just for you! Please hold on."
                     />
                 </div>
