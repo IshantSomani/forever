@@ -1,47 +1,51 @@
-import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
+import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { Auth } from '../context/AuthProvider';
+import { usePagination } from '../hooks/usePagination.js';
+import Pagination from '../components/Pagination.jsx';
 
 const List = () => {
-  const [list, setList] = useState([]);
-  const { token, currency } = useContext(Auth)
+  const [list, setList] = useState([]); 
+  const { token, currency } = useContext(Auth);
+
+  const { currentPage, setCurrentPage, currentProducts, totalPages } = usePagination({ list });
 
   const fetchList = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/products/allProduct`)
-
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/products/allProduct`);
+      
       if (response.data?.message) {
-        setList(response.data.data)
+        setList(response.data.data);
       } else {
-        toast.error(response.data?.message || 'Failed to fetch products')
+        toast.error(response.data?.message || 'Failed to fetch products');
       }
     } catch (error) {
-      console.error('Fetch error:', error)
-      toast.error(error.response?.data?.message || error.message || 'Something went wrong')
+      console.error('Fetch error:', error);
+      toast.error(error.response?.data?.message || error.message || 'Something went wrong');
     }
-  }
+  };
 
   const removeProduct = async (id) => {
     try {
       const response = await axios.delete(`${import.meta.env.VITE_BACKEND_URI}/products/remove/${id}`, {
-        headers: { token }
+        headers: { token },
       });
       if (response.data?.message) {
-        await fetchList()
+        await fetchList();  
       } else {
-        toast.error(response.data?.message || 'Failed to fetch products')
+        toast.error(response.data?.message || 'Failed to remove product');
       }
-
     } catch (error) {
-      console.error('Fetch error:', error)
-      toast.error(error.response?.data?.message || error.message || 'Something went wrong')
+      console.error('Remove error:', error);
+      toast.error(error.response?.data?.message || error.message || 'Something went wrong');
     }
-  }
+  };
 
   useEffect(() => {
-    fetchList()
-  }, [])
+    fetchList();
+  }, []);
+  
 
   return (
     <div className='p-4'>
@@ -62,9 +66,9 @@ const List = () => {
           </thead>
           <tbody>
             {/* ----------Product List---------- */}
-            {list.map((item, index) => (
+            {currentProducts.map((item, index) => (
               <tr key={item._id || index} className='border-t hover:bg-gray-50'>
-                <td className='p-2'>{index + 1}</td>
+                <td className='p-2'>{item.id}</td>
                 <td className='p-2 h-fit'>
                   <img
                     src={item.images[0]}
@@ -90,6 +94,13 @@ const List = () => {
           </tbody>
         </table>
 
+        {/* Pagination Component */}
+        <Pagination
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+          totalPages={totalPages}
+        />
+
         {list.length === 0 && (
           <div className='text-center py-4 text-gray-500'>
             No products found
@@ -97,7 +108,7 @@ const List = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default List
+export default List;
