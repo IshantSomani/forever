@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { memo, useCallback, useContext, useEffect, useState } from 'react'
 import { ShopContext } from '../context/ShopContext'
 import { assets } from '../assets/assets';
 import Title from '../components/Title';
@@ -18,22 +18,21 @@ const Collection = () => {
   // Pagination Custom Hook 
   const { currentPage, setCurrentPage, currentProducts, totalPages } = usePagination({ FilterProducts })
 
-  const toggleCategory = (e) => {
-    if (category.includes(e.target.value)) {
-      setCategory(prev => prev.filter(item => item !== e.target.value))
-    } else {
-      setCategory(prev => [...prev, e.target.value])
-    }
-  }
+  const toggleCategory = useCallback((value) => {
+    setCategory(prev =>
+      prev.includes(value)
+        ? prev.filter(item => item !== value)
+        : [...prev, value]
+    );
+  }, []);
 
-  const toggleSubCategory = (e) => {
-    if (subCategory.includes(e.target.value)) {
-      setSubCategory(prev => prev.filter(item => item !== e.target.value))
-    } else {
-      setSubCategory(prev => [...prev, e.target.value])
-    }
-  }
-
+  const toggleSubCategory = useCallback((value) => {
+    setSubCategory(prev =>
+      prev.includes(value)
+        ? prev.filter(item => item !== value)
+        : [...prev, value]
+    );
+  }, []);
   const appliyFilter = useCallback(() => {
     let tempProducts = products.slice();
 
@@ -65,6 +64,10 @@ const Collection = () => {
     setCurrentPage(1);
   }, [products, category, subCategory, search, showSearch, sortType, setCurrentPage]);
 
+  const handleSortChange = useCallback((e) => {
+    setSortType(e.target.value);
+  }, []);
+
   useEffect(() => {
     appliyFilter()
   }, [appliyFilter, category, subCategory, search, showSearch, products])
@@ -95,13 +98,13 @@ const Collection = () => {
             <p className='mb-3 text-sm font-medium uppercase select-none'>CATEGORIES</p>
             <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
               <p className='flex gap-2'>
-                <input type='checkbox' className='w-3' value={'mens'} onChange={toggleCategory} /><span>Men</span>
+                <input type='checkbox' className='w-3' value={'mens'} onChange={(e) => toggleCategory(e.target.value)} /><span>Men</span>
               </p>
               <p className='flex gap-2'>
-                <input type='checkbox' className='w-3' value={'womens'} onChange={toggleCategory} /><span>Women</span>
+                <input type='checkbox' className='w-3' value={'womens'} onChange={(e) => toggleCategory(e.target.value)} /><span>Women</span>
               </p>
               <p className='flex gap-2'>
-                <input type='checkbox' className='w-3' value={'kids'} onChange={toggleCategory} /><span>Kids</span>
+                <input type='checkbox' className='w-3' value={'kids'} onChange={(e) => toggleCategory(e.target.value)} /><span>Kids</span>
               </p>
             </div>
           </div>
@@ -125,9 +128,12 @@ const Collection = () => {
         {/* Right Side */}
         <div className='flex-1'>
 
-          <div className="flex justify-between text-base sm:text-2xl mb-4">
+          <div className="flex justify-between text-base sm:text-2xl items-center">
             <Title title1={"All"} title2={"COLLECTIONS"} />
-            <select onChange={(e) => setSortType(e.target.value)} className='border-2 border-gray-300 text-sm px-2 select-none'>
+            <select
+              onChange={handleSortChange}
+              className='border-2 border-gray-300 text-sm px-2 py-1 select-none mb-4'
+            >
               <option value="relavent">Sort by: Relavent</option>
               <option value="low-high">Sort by: Low to High</option>
               <option value="high-low">Sort by: High to Low</option>
@@ -158,4 +164,4 @@ const Collection = () => {
   )
 }
 
-export default Collection
+export default memo(Collection)

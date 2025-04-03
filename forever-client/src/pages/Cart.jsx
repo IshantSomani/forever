@@ -40,54 +40,63 @@ const Cart = () => {
           cartData.map((item, index) => {
             const productsData = products.find((product) => product._id === item._id);
             return (
-              <div key={index} className='py-4 border-t-b text-gray-700 grid grid-cols-[3fr_1fr_1fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-2 sm:gap-4'>
+              <div key={index} className='bg-white p-4 border-t-b rounded-md transition-shadow sm:grid sm:grid-cols-[4fr_2fr_0.5fr]'>
                 {/* Product Info */}
-                <div className="flex items-start gap-6">
+                <div className="flex items-start gap-4 sm:gap-8 mb-4 sm:mb-0">
                   <img
                     src={productsData.images[0]}
                     alt='product'
-                    className='w-20 sm:w-24'
+                    className='w-20 sm:w-24 object-cover rounded shadow'
                   />
-                  <div>
-                    <p className='text-sm sm:text-lg font-medium'>{productsData.name}</p>
-                    <div className='flex items-center gap-3 mt-2 select-none'>
-                      <p>{currency}{productsData.price}</p>
-                      <p className='px-2 sm:px-3 sm:py-1 border border-gray-400 bg-slate-50'>{item.size}</p>
+                  <div className="flex-1">
+                    <p className='text-base font-medium text-gray-900'>{productsData.name}</p>
+                    <p className='text-sm font-base text-gray-500'>{productsData.description}</p>
+                    <div className='flex items-center gap-2 mt-1'>
+                      <span className='text-sm text-gray-500'>{item.size}</span>
+                      <span className='text-gray-400'>·</span>
+                      <span className='text-sm font-medium text-gray-900'>
+                        {currency}{productsData.price}
+                      </span>
                     </div>
                   </div>
                 </div>
 
-                {/* Quantity Controls */}
-                <div className="flex items-center justify-center gap-2  select-none">
-                  <button
-                    onClick={() => removeFromCart(item._id, item.size)}
-                    className="px-2 sm:px-3 py-1 border hover:bg-gray-100 text-sm sm:text-base"
-                  >
-                    -
-                  </button>
-                  <span className="w-6 text-center text-sm sm:text-base">{item.quantity}</span>
-                  <button
-                    onClick={() => addToCart(item._id, item.size)}
-                    className="px-2 sm:px-3 py-1 border hover:bg-gray-100 text-sm sm:text-base"
-                  >
-                    +
-                  </button>
-                </div>
+                {/* Quantity Controls and Total */}
+                <div className="flex items-center justify-between border-t sm:border-t-0 pt-4 sm:pt-0">
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => removeFromCart(item._id, item.size)}
+                      className="w-8 h-8 rounded-lg border flex items-center justify-center hover:bg-gray-50 transition-colors"
+                    >
+                      <span className="text-xl">−</span>
+                    </button>
+                    <span className="w-8 text-center font-medium">{item.quantity}</span>
+                    <button
+                      onClick={() => addToCart(item._id, item.size)}
+                      className="w-8 h-8 rounded-lg border flex items-center justify-center hover:bg-gray-50 transition-colors"
+                    >
+                      <span className="text-xl">+</span>
+                    </button>
+                  </div>
 
-                {/* Total Price */}
-                <div className="text-right pr-2 sm:pr-4 text-sm sm:text-base">
-                  {currency}{(productsData.price * item.quantity).toFixed(2)}
+                  <div className="text-right font-medium text-gray-900">
+                    {currency}{(productsData.price * item.quantity).toFixed(2)}
+                  </div>
                 </div>
               </div>
-
             )
           })
         )}
       </div>
+
       {cartData.length > 0 && (
-        <div className='max-w-xl ml-auto space-y-4'>
+        <div className='max-w-xl ml-auto space-y-6'>
           <CartTotal />
-          <button onClick={() => navigate('/place-order')} className='w-full bg-black text-white py-3 hover:bg-black/95 transition-colors'>
+          <button
+            onClick={() => navigate('/place-order')}
+            className='w-full bg-black text-white py-4 rounded font-medium flex items-center justify-center gap-2 hover:bg-black/95 transition-colors'
+            
+          >
             Proceed to Checkout
           </button>
         </div>

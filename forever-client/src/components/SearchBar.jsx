@@ -17,7 +17,7 @@ const SearchBar = () => {
   }, [showSearch, location]);
 
   return showSearch && visible ? (
-    <div className='border-t border-b border-gray-100 bg-gray-50 text-center select-none'>
+    <div className='border-t border-b border-gray-100 bg-gray-50/40 text-center select-none'>
       <div className='inline-flex items-center bg-white justify-center border-2 border-neutral-400 px-5 py-2 my-5 mx-3 rounded-full w-3/4 sm:w-1/2'>
         <input
           type='text'

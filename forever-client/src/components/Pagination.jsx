@@ -22,8 +22,8 @@ const Pagination = ({ setCurrentPage, currentPage, totalPages }) => {
                         <button
                             onClick={() => setCurrentPage(page)}
                             className={`flex size-6 items-center justify-center rounded-radius p-1 ${currentPage === page
-                                ? 'bg-primary font-bold text-on-primary dark:bg-primary-dark'
-                                : 'text-on-surface hover:text-primary dark:text-on-surface-dark'
+                                ? 'bg-primary font-bold text-on-primary'
+                                : 'text-on-surface hover:text-primary'
                                 }`}
                         >
                             {page}

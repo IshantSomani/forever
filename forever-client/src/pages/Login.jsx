@@ -77,7 +77,7 @@ const Login = () => {
         <input onChange={(e) => setEmail(e.target.value)} value={email} type="email" className={inputClasses} placeholder="Email Address" required />
         <input onChange={(e) => setPassword(e.target.value)} value={password} type="password" className={inputClasses} placeholder="Password" required />
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-sm mt-[-10px]">
+        <div className="flex items-center justify-between gap-3 text-sm mt-[-10px]">
           <button type="button" onClick={handleToggle} className="text-black hover:underline hover:underline-offset-4 font-medium transition-colors">
             {formState === FORM_TYPES.LOGIN ? 'Create New Account' : 'Already have an account?'}
           </button>

@@ -53,7 +53,7 @@ const Product = () => {
             <img
               src={image}
               alt='image'
-              className="w-full h-auto object-cover border-pink-200 border-2 aspect-square lg:aspect-[3/4]"
+              className="w-full h-auto object-cover border-pink-200 border-2 aspect-auto lg:aspect-[3/4]"
               loading="eager"
             />
           </div>
