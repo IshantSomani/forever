@@ -1,19 +1,25 @@
 import { useState } from "react";
 
-export const usePagination = ({ FilterProducts }) => {
+export const usePagination = ({ list }) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(12);
+    const [itemsPerPage] = useState(6);
 
     // Calculate pagination indexes
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentProducts = FilterProducts.slice(indexOfFirstItem, indexOfLastItem);
+    const currentProducts = list.slice(indexOfFirstItem, indexOfLastItem);
     // Calculate total pages
-    const totalPages = Math.ceil(FilterProducts.length / itemsPerPage);
+    const totalPages = Math.ceil(list.length / itemsPerPage);
+
+    const productList = currentProducts.map((item, index) => ({
+        ...item,
+        id: indexOfFirstItem + index + 1,
+    }));
 
     return {
         currentPage, setCurrentPage,
-        itemsPerPage, currentProducts,
+        itemsPerPage, 
+        currentProducts: productList,
         totalPages,
     }
 }
