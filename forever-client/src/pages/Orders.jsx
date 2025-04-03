@@ -22,7 +22,6 @@ const Orders = () => {
       if (response.data?.data) {
         let allOrdersItems = []
         response.data.data.map(order => {
-          console.log(order)
           order.items.map(item => {
             item['status'] = order.status
             item['amount'] = order.amount

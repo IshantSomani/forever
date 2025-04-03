@@ -75,11 +75,9 @@ const PlaceOrder = () => {
       }
 
       if (method === 'stripe') {
-        console.log('inside stripe')
         const response = await axios.post(`${import.meta.env.VITE_BACKEND_URI}/order/stripe`, orderData, {
           headers: { token },
         });
-        console.log("response:", response)
 
         if (response.data.message) {
           const { session_url } = response.data

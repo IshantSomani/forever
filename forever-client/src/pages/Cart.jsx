@@ -26,7 +26,6 @@ const Cart = () => {
       setCartData(tempData);
     }
   }, [cartItems, products]);
-  console.log(cartData)
 
   return (
     <div className='border-t pt-14'>
