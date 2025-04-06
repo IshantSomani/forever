@@ -34,7 +34,7 @@ const Collection = () => {
     );
   }, []);
   const appliyFilter = useCallback(() => {
-    let tempProducts = products.slice();
+    let tempProducts = [...products];
 
     if (showSearch && search) {
       tempProducts = tempProducts.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))
@@ -72,6 +72,18 @@ const Collection = () => {
     appliyFilter()
   }, [appliyFilter, category, subCategory, search, showSearch, products])
 
+  const categories = [
+    { value: 'mens', label: 'Men' },
+    { value: 'womens', label: 'Women' },
+    { value: 'kids', label: 'Kids' }
+  ];
+
+  const subCategories = [
+    { value: 'topwear', label: 'Topwear' },
+    { value: 'bottomwear', label: 'Bottomwear' },
+    { value: 'footwear', label: 'Footwear' }
+  ];
+
 
   if (!products.length) {
     return (
@@ -97,30 +109,36 @@ const Collection = () => {
           <div className={`border border-gray-300 pl-5 py-3 mt-6 ${showFilters ? '' : 'hidden'} sm:block`}>
             <p className='mb-3 text-sm font-medium uppercase select-none'>CATEGORIES</p>
             <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
-              <p className='flex gap-2'>
-                <input type='checkbox' className='w-3' value={'mens'} onChange={(e) => toggleCategory(e.target.value)} /><span>Men</span>
-              </p>
-              <p className='flex gap-2'>
-                <input type='checkbox' className='w-3' value={'womens'} onChange={(e) => toggleCategory(e.target.value)} /><span>Women</span>
-              </p>
-              <p className='flex gap-2'>
-                <input type='checkbox' className='w-3' value={'kids'} onChange={(e) => toggleCategory(e.target.value)} /><span>Kids</span>
-              </p>
+              {categories.map(({ value, label }) => (
+                <label key={value} className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    value={value}
+                    checked={category.includes(value)}
+                    onChange={() => toggleCategory(value)}
+                    className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                  />
+                  {label}
+                </label>
+              ))}
             </div>
           </div>
           {/* Sub-Categorey Filter */}
           <div className={`border border-gray-300 pl-5 py-3 my-5 ${showFilters ? '' : 'hidden'} sm:block`}>
             <p className='mb-3 text-sm font-medium uppercase select-none'>TYPE</p>
             <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
-              <p className='flex gap-2'>
-                <input type='checkbox' className='w-3' value={'topwear'} onChange={toggleSubCategory} /><span>Topwear</span>
-              </p>
-              <p className='flex gap-2'>
-                <input type='checkbox' className='w-3' value={'bottomwear'} onClick={toggleSubCategory} /><span>Bottomwear</span>
-              </p>
-              <p className='flex gap-2'>
-                <input type='checkbox' className='w-3' value={'footwear'} onClick={toggleSubCategory} /><span>Footwear</span>
-              </p>
+              {subCategories.map(({ value, label }) => (
+                <label key={value} className="flex items-center gap-2 text-sm text-gray-700 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    value={value}
+                    checked={subCategory.includes(value)}
+                    onChange={() => toggleSubCategory(value)}
+                    className="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                  />
+                  {label}
+                </label>
+              ))}
             </div>
           </div>
         </div>

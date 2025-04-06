@@ -20,7 +20,7 @@ const Navbar = () => {
   return (
     <nav className='flex justify-between items-center py-5 font-medium sticky top-0 z-50 px-0.5 select-none bg-white/70'>
       <Link to='/'><img src={assets.logo} className="w-36" alt='logo' loading="lazy" /></Link>
-      <ul className='hidden sm:flex gap-5 text-sm text-gray-700 items-center'>
+      <div className='hidden sm:flex gap-5 text-sm text-gray-700 items-center'>
         <NavLink
           to='/'
           className={({ isActive }) =>
@@ -56,7 +56,7 @@ const Navbar = () => {
         <Link to={`${import.meta.env.VITE_ADMIN_URI}`} className="cta">
           <span className="hover-underline-animation">Admin Panel</span>
         </Link>
-      </ul>
+      </div>
 
       <div className="flex items-center gap-6">
         <img
@@ -146,4 +146,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default React.memo(Navbar)

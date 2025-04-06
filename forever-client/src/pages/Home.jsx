@@ -1,20 +1,24 @@
-import React from 'react'
-import Hero from '../components/Hero'
-import LatestCollection from '../components/LatestCollection'
-import BestSeller from '../components/BestSeller'
-import OurPolicy from '../components/OurPolicy'
-import NewsLetterBox from '../components/NewsLetterBox'
+import React, { lazy, Suspense } from 'react';
+import LoadingSpinner from '../components/LoadingSpinner';
+
+const Hero = lazy(() => import('../components/Hero'));
+const LatestCollection = lazy(() => import('../components/LatestCollection'));
+const BestSeller = lazy(() => import('../components/BestSeller'));
+const OurPolicy = lazy(() => import('../components/OurPolicy'));
+const NewsLetterBox = lazy(() => import('../components/NewsLetterBox'));
 
 const Home = () => {
   return (
-    <>
-      <Hero />
-      <LatestCollection />
-      <BestSeller />
-      <OurPolicy />
-      <NewsLetterBox />
-    </>
-  )
-}
+    <main>
+      <Suspense fallback={<LoadingSpinner />}>
+        <Hero />
+        <LatestCollection />
+        <BestSeller />
+        <OurPolicy />
+        <NewsLetterBox />
+      </Suspense>
+    </main>
+  );
+};
 
-export default Home
+export default React.memo(Home);

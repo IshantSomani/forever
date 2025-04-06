@@ -1,5 +1,5 @@
 import React from 'react'
-
+import PropTypes from 'prop-types'
 const Title = ({ title1, title2 }) => {
     return (
         <div className='inline-flex gap-1.5 items-center mb-3'>
@@ -9,4 +9,10 @@ const Title = ({ title1, title2 }) => {
     )
 }
 
-export default Title
+Title.propTypes = {
+    title1: PropTypes.string.isRequired,
+    title2: PropTypes.string.isRequired,
+    className: PropTypes.string
+}
+
+export default React.memo(Title)

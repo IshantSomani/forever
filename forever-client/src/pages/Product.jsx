@@ -61,7 +61,7 @@ const Product = () => {
 
         {/* ----------Product Info---------- */}
         <div className="flex-1">
-        <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{productData.name}</h1>
+          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">{productData.name}</h1>
           <p className="text-gray-600 leading-relaxed">{productData.description}</p>
 
           <div className='flex items-center gap-1 mt-2 select-none'>
@@ -103,36 +103,38 @@ const Product = () => {
           <hr className='mt-8 text-gray-300' />
 
           <div className="space-y-2 pt-4 border-t border-gray-200">
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <span>100% Original Products</span>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <span>Cash on Delivery Available</span>
-            </div>
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <span>Easy 7-Day Returns</span>
-            </div>
+            <ul className="space-y-2 pt-4 border-t border-gray-200 text-sm text-gray-600">
+              <li className="flex items-center gap-2">
+                <span>✓</span> 100% Original Products
+              </li>
+              <li className="flex items-center gap-2">
+                <span>✓</span> Cash on Delivery Available
+              </li>
+              <li className="flex items-center gap-2">
+                <span>✓</span> Easy 7-Day Returns
+              </li>
+            </ul>
           </div>
         </div>
       </div>
 
       {/* ----------Description & Review Section---------- */}
       <div className="mt-16 border-b border-gray-200">
-        <div className="flex">
+        <div className="flex -mb-px">
           <button
             onClick={() => setActiveTab('description')}
-            className={`px-6 py-3 text-sm font-medium ${activeTab === 'description'
-              ? 'text-pink-500 border-b-2 border-pink-500'
-              : 'text-gray-500 hover:text-gray-700'
+            className={`py-4 px-6 text-sm font-medium border-b-2 ${activeTab === 'description'
+              ? 'border-pink-500 text-pink-600'
+              : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
               }`}
           >
             Description
           </button>
           <button
             onClick={() => setActiveTab('reviews')}
-            className={`px-6 py-3 text-sm font-medium ${activeTab === 'reviews'
-              ? 'text-pink-500 border-b-2 border-pink-500'
-              : 'text-gray-500 hover:text-gray-700'
+            className={`py-4 px-6 text-sm font-medium border-b-2 ${activeTab === 'reviews'
+              ? 'border-pink-500 text-pink-600'
+              : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
               }`}
           >
             Reviews (122)
@@ -142,7 +144,7 @@ const Product = () => {
 
       <div className="mt-8 prose max-w-none">
         {activeTab === 'description' && (
-          <div className="space-y-4 text-gray-600">
+          <div className="prose max-w-none text-gray-600 space-y-4">
             <p>
               Our {productData.name} is crafted with premium materials to ensure lasting comfort and style.
               The carefully selected fabric provides breathability and durability, making it perfect for
@@ -152,6 +154,11 @@ const Product = () => {
               Designed with attention to detail, this product features a modern cut that flatters all body
               types. The versatile design makes it easy to pair with your existing wardrobe essentials.
             </p>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>Premium quality materials</li>
+              <li>Designed for comfort and style</li>
+              <li>Easy care and maintenance</li>
+            </ul>
           </div>
         )}
 

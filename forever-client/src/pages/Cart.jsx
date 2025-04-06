@@ -45,8 +45,11 @@ const Cart = () => {
                 <div className="flex items-start gap-4 sm:gap-8 mb-4 sm:mb-0">
                   <img
                     src={productsData.images[0]}
-                    alt='product'
+                    alt={productsData.name}
                     className='w-20 sm:w-24 object-cover rounded shadow'
+                    width={96}
+                    height={96}
+                    loading="lazy"
                   />
                   <div className="flex-1">
                     <p className='text-base font-medium text-gray-900'>{productsData.name}</p>
@@ -95,7 +98,7 @@ const Cart = () => {
           <button
             onClick={() => navigate('/place-order')}
             className='w-full bg-black text-white py-4 rounded font-medium flex items-center justify-center gap-2 hover:bg-black/95 transition-colors'
-            
+
           >
             Proceed to Checkout
           </button>

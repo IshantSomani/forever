@@ -48,4 +48,4 @@ const Pagination = ({ setCurrentPage, currentPage, totalPages }) => {
     )
 }
 
-export default Pagination
+export default React.memo(Pagination)

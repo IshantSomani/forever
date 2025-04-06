@@ -18,6 +18,7 @@
   --radius-radius: var(--radius-sm);
 }
 
+
 @layer components {
   .nav-flex-mobile {
     @apply py-2 pl-6 border border-gray-200;
