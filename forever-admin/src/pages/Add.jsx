@@ -19,6 +19,7 @@ const Add = () => {
   const [subcategory, setSubCategory] = useState('topwear');
   const [bestSeller, setBestSeller] = useState(false);
   const [sizes, setSizes] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const imageInputs = [
     { id: 'image1', value: image1, setter: setImage1, num: 1 },
@@ -32,10 +33,21 @@ const Add = () => {
 
     // Validate required fields
     if (!image1) {
-      alert('Please upload at least one image (Image 1 is required)');
+      toast.error('Please upload at least one image (Image 1 is required)');
       return;
     }
 
+    if (sizes.length === 0) {
+      toast.error('Please select at least one available size (S, M, L, XL, XXL)');
+      return;
+    }
+
+    if (!price || Number(price) <= 0) {
+      toast.error('Please enter a valid product price');
+      return;
+    }
+
+    setIsSubmitting(true);
     try {
       const formData = new FormData();
       formData.append('name', name);
@@ -83,7 +95,8 @@ const Add = () => {
         || 'Failed to add product';
       console.error('Submission error:', errorMessage);
       toast.error(errorMessage);
-
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -221,9 +234,13 @@ const Add = () => {
       {/* Submit Button */}
       <button
         type="submit"
-        className='mt-4 px-6 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600 transition-colors'
+        disabled={isSubmitting}
+        className='mt-4 px-6 py-2.5 bg-pink-500 text-white rounded-md hover:bg-pink-600 transition-colors cursor-pointer disabled:opacity-50 flex items-center gap-2 font-medium'
       >
-        Add Product
+        {isSubmitting && (
+          <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+        )}
+        {isSubmitting ? 'Adding Product...' : 'Add Product'}
       </button>
     </form>
   )
