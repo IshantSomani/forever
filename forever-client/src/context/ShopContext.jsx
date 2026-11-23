@@ -188,14 +188,14 @@ const ShopeContextProvider = ({ children }) => {
     }, [token]);
 
 
-    const calculateDeliveryFee = (subtotal) => {
+    const calculateDeliveryFee = useCallback((subtotal) => {
         if (subtotal === 0) return 0;
         if (subtotal >= 4000) return 0; // Free delivery over ₹4000
         if (subtotal >= 3000) return 5;  // Reduced fee over ₹3000
         if (subtotal >= 2000) return 10;  // Reduced fee over ₹2000
         if (subtotal >= 1000) return 20;  // Reduced fee over ₹1000
         return delivery_fee; // Base fee
-    }
+    }, [delivery_fee])
 
     const logout = () => {
         localStorage.removeItem('token');
