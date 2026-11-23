@@ -13,20 +13,27 @@ const Product = () => {
   const [activeTab, setActiveTab] = useState('description')
 
   const fetchProductData = useCallback(async () => {
-    products.map((item) => {
-      if (item._id === productId) {
-        setProductData(item);
-        setImage(item.images[0]);
-        return null;
-      }
-    })
+    const item = products.find((p) => p._id === productId);
+    if (item) {
+      setProductData(item);
+      setImage(item.images[0]);
+    }
   }, [productId, products])
 
   useEffect(() => {
     fetchProductData();
   }, [productId, fetchProductData])
 
-  if (!productData) return <div className="animate-pulse h-screen bg-gray-50" />
+  if (!productData) {
+    if (products.length > 0) {
+      return (
+        <div className="text-center py-24">
+          <p className="text-xl font-medium text-gray-700">Product not found</p>
+        </div>
+      );
+    }
+    return <div className="animate-pulse h-screen bg-gray-50" />;
+  }
 
   return productData ? (
     <div className='border-t--gray-300 pt-10 transition-opacity ease-in duration-500 opacity-100'>

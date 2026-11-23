@@ -22,7 +22,7 @@ const Login = () => {
     e.preventDefault();
     try {
       if (formState === FORM_TYPES.SIGNUP) {
-        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URI}/users/signup`, {
+        const response = await axios.post(`${import.meta.env.VITE_BACKEND_URI}/users/register`, {
           name,
           email,
           password,

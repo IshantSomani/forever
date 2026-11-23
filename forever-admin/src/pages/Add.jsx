@@ -20,6 +20,13 @@ const Add = () => {
   const [bestSeller, setBestSeller] = useState(false);
   const [sizes, setSizes] = useState([]);
 
+  const imageInputs = [
+    { id: 'image1', value: image1, setter: setImage1, num: 1 },
+    { id: 'image2', value: image2, setter: setImage2, num: 2 },
+    { id: 'image3', value: image3, setter: setImage3, num: 3 },
+    { id: 'image4', value: image4, setter: setImage4, num: 4 },
+  ];
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
@@ -86,17 +93,17 @@ const Add = () => {
       <div>
         <p className='mb-2'>Upload Image</p>
         <div className='flex gap-2 flex-wrap items-center'>
-          {[1, 2, 3, 4].map((num) => (
-            <label key={num} htmlFor={`image${num}`}>
+          {imageInputs.map(({ id, value, setter, num }) => (
+            <label key={id} htmlFor={id}>
               <img
-                src={!eval(`image${num}`) ? assets.upload_area : URL.createObjectURL(eval(`image${num}`))}
+                src={!value ? assets.upload_area : URL.createObjectURL(value)}
                 className='w-24 h-24 object-cover border-2 border-dashed border-gray-300 rounded-md cursor-pointer'
                 alt={`Upload ${num}`}
               />
               <input
-                onChange={(e) => eval(`setImage${num}`)(e.target.files[0] || null)}
+                onChange={(e) => setter(e.target.files[0] || null)}
                 type="file"
-                id={`image${num}`}
+                id={id}
                 hidden
                 accept="image/*"
               />

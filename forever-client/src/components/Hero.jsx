@@ -25,7 +25,10 @@ const Hero = () => {
                     alt='Latest fashion arrivals from our collection'
                     className='w-full h-full object-cover'
                     loading="eager"
+                    fetchpriority="high"
                     decoding="async"
+                    width={600}
+                    height={400}
                 />
             </div>
         </div>

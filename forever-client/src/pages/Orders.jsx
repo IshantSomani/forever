@@ -21,17 +21,19 @@ const Orders = () => {
 
       if (response.data?.data) {
         let allOrdersItems = []
-        response.data.data.map(order => {
-          order.items.map(item => {
-            item['status'] = order.status
-            item['amount'] = order.amount
-            item['payment'] = order.payment
-            item['paymentMethod'] = order.paymentMethod
-            item['date'] = order.date
-            allOrdersItems.push(item)
-          })
-          setOrderData(allOrdersItems.reverse())
-        })
+        response.data.data.forEach(order => {
+          order.items.forEach(item => {
+            allOrdersItems.push({
+              ...item,
+              status: order.status,
+              amount: order.amount,
+              payment: order.payment,
+              paymentMethod: order.paymentMethod,
+              date: order.date
+            });
+          });
+        });
+        setOrderData(allOrdersItems.reverse());
       }
     } catch (err) {
       console.error('Error fetching order data', err);

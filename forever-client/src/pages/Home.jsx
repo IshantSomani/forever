@@ -1,17 +1,17 @@
 import React, { lazy, Suspense } from 'react';
 import LoadingSpinner from '../components/LoadingSpinner';
+import Hero from '../components/Hero';
+import NewsLetterBox from '../components/NewsLetterBox';
 
-const Hero = lazy(() => import('../components/Hero'));
 const LatestCollection = lazy(() => import('../components/LatestCollection'));
 const BestSeller = lazy(() => import('../components/BestSeller'));
 const OurPolicy = lazy(() => import('../components/OurPolicy'));
-const NewsLetterBox = lazy(() => import('../components/NewsLetterBox'));
 
 const Home = () => {
   return (
     <main>
+      <Hero />
       <Suspense fallback={<LoadingSpinner />}>
-        <Hero />
         <LatestCollection />
         <BestSeller />
         <OurPolicy />

@@ -68,7 +68,7 @@ const List = () => {
             {/* ----------Product List---------- */}
             {currentProducts.map((item, index) => (
               <tr key={item._id || index} className='border-t hover:bg-gray-50'>
-                <td className='p-2'>{item.id}</td>
+                <td className='p-2 font-mono text-xs text-gray-500'>{item._id || item.id}</td>
                 <td className='p-2 h-fit'>
                   <img
                     src={item.images[0]}

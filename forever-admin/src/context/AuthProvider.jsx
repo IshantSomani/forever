@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const Auth = createContext();
 
 const AuthProvider = ({ children }) => {

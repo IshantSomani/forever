@@ -31,7 +31,7 @@ const CartTotal = () => {
             delivery: parseFloat(delivery.toFixed(2)),
             grandTotal: parseFloat(grandTotal.toFixed(2))
         });
-    }, [cartItems, products, setTotalPrice]);
+    }, [cartItems, products, setTotalPrice, calculateDeliveryFee]);
 
     return (
         <>
